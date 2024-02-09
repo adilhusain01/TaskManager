@@ -1,56 +1,63 @@
-const { tasks } = require("../public/tasks");
+const Task = require("../models/taskModel");
 
-const getTasks = (req, res) => {
-    res.status(200).json(tasks);
-}
-
-const getTaskByID = (req, res) => {
-    const { id } = req.params;
-
-    const thatTask = tasks.find((task) => task.id === Number(id));
-    if(!thatTask){
-        return res.status(404).json({success:false, msg:`Can't find task with ID ${id}`});
-    }    
-
-    res.status(200).json({success:true, data:thatTask});
-}
-
-const createTask = (req, res) => {
-    const { task } = req.body;
-    res.status(201).json({success:true, data:[...tasks, task]})
-}
-
-const updateTask = (req, res) => {
-    const { task } = req.body;
-    const { id } = req.params;
-
-    const thatTask = tasks.find((task) => task.id === Number(id));
-    if(!thatTask){
-        return res.status(404).json({success:false, msg:`Can't find task with ID ${id}`});
+const getTasks = async (req, res) => {
+    try{
+        const tasks = await Task.find();
+        res.status(200).json(tasks);
+    }catch(error){
+        res.status(400).json({message: error.message});
     }
+}
 
-    const updatedTasks = tasks.map((singleTask) => {
-        if(singleTask.id === Number(id)){
-            singleTask.task = task;
+const getTaskByID = async (req, res) => {
+    try {
+        const thatTask = await Task.findById(req.params.id);
+        if(!thatTask){
+            return res.status(404).json({message: `Can't find task with ID ${req.params.id}`});
+        }    
+
+        res.status(200).json(thatTask);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+    
+}
+
+const createTask = async (req, res) => {
+    try {
+        const task = new Task({
+            task: req.body.task
+        })
+    
+        const newTask = await task.save();
+        res.status(201).json(newTask);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+}
+
+const updateTask = async (req, res) => {
+    try {
+        const task = await Task.findByIdAndUpdate(req.params.id, req.body, {new:true});
+        if(!task){
+            return res.status(404).json({message: `Can't find task with ID ${req.params.id}`});
         }
-
-        return singleTask;
-    })
-
-    res.status(200).json({success:true, data:updatedTasks});
+        res.status(200).json(task);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
 }
 
-const deleteTask = (req, res) => {
-    const { id } = req.params;
-
-    const thatTask = tasks.find((task) => task.id === Number(id));
-    if(!thatTask){
-        return res.status(404).json({success:false, msg:`Can't find task with ID ${id}`});
+const deleteTask = async (req, res) => {
+    try {
+        const task = await Task.findByIdAndDelete(req.params.id);
+        if(!task){
+            return res.status(404).json({message: `Can't find task with ID ${req.params.id}`});
+        }
+        res.status(200).json();
+    } catch (error) {
+        res.status(400).json({message: error.message});
     }
-
-    const remainingTasks = tasks.filter((task) => task.id !== Number(id));
-
-    res.status(200).json({success:true, data:remainingTasks});
 }
 
 module.exports = {getTasks, getTaskByID, createTask, updateTask, deleteTask};
