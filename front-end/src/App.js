@@ -1,15 +1,15 @@
-import './App.css';
+// src/App.js
+import React from 'react';
+import TaskPage from './pages/taskPage';
+import GlobalStyle from './styles/globalStyles';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
+    <div>
+      <GlobalStyle />
+      <TaskPage />
     </div>
   );
-}
+};
 
 export default App;
