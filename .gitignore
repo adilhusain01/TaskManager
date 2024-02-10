@@ -1,2 +1,18 @@
 /backEnd/node_modules
-/frontEnd/node_modules
+
+
+# dependencies
+/front-end/node_modules
+
+# testing
+/front-end/coverage
+
+# production
+/front-end/build
+
+# misc
+/front-end/.DS_Store
+/front-end/.env
+/front-end/npm-debug.log*
+/front-end/yarn-debug.log*
+/front-end/yarn-error.log*
