@@ -1,7 +1,7 @@
 // taskService.js
 import axios from 'axios';
 
-const BASE_URL = 'https://taskmanagerapi-a2eu.onrender.com';
+const BASE_URL = 'https://taskmanagerapi-a2eu.onrender.com/api/tasks';
 
 const taskService = {
   getTasks: async () => {
