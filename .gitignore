@@ -1,5 +1,4 @@
 /backe-nd/node_modules
-/backe-nd/.env
-
+**/*.env
 /front-end/node_modules
 
