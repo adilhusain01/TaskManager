@@ -6,6 +6,8 @@ const router = require(("./src/routes/taskRoutes"));
 const dotenv = require("dotenv")
 dotenv.config()
 
+const PORT = process.env.PORT || 8000;
+
 const app = express();
 
 //takes req.body
@@ -36,8 +38,8 @@ mongoose.connect(`${process.env.MONGO_CONNECTION}`).then(() => {
 
 app.use('/api/tasks', router);
 
-app.listen(8000, () => {
-    console.log('Server running on port 8000');
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 })
 
 module.exports = app;
