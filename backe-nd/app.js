@@ -17,18 +17,12 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(
   cors({
-    origin: "http://localhost:3000", // Allow requests only from this origin
-    methods: ["POST", "PUT", "PATCH", "GET", "DELETE", "OPTIONS"], // Allowed HTTP methods
-    allowedHeaders: [
-      "Origin",
-      "X-Api-Key",
-      "X-Requested-With",
-      "Content-Type",
-      "Accept",
-      "Authorization",
-    ], // Allowed headers
+    origin: "*", // Allow requests from all origins
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"], // Allow all HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow only specific headers
   })
 );
+
 
 mongoose.connect(`${process.env.MONGO_CONNECTION}`).then(() => {
     console.log("Connected to mongoDB");
