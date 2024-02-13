@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../styles/styles.css';
+
 
 const TaskForm = ({ onSubmit }) => {
   const [inputValue, setInputValue] = useState('');

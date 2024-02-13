@@ -1,12 +1,11 @@
 // src/App.js
 import React from 'react';
 import TaskPage from './pages/taskPage';
-import GlobalStyle from './styles/globalStyles';
+import '../src/styles/styles.css';
 
 const App = () => {
   return (
     <div>
-      <GlobalStyle />
       <TaskPage />
     </div>
   );

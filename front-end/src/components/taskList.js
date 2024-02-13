@@ -1,5 +1,7 @@
 import React from 'react';
 import TaskItem from './taskItem';
+import '../styles/styles.css';
+
 
 const TaskList = ({ tasks, onDelete, onUpdate }) => {
   return (

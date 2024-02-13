@@ -1,4 +1,6 @@
 import React from 'react';
+import '../styles/styles.css';
+
 
 const TaskItem = ({ task, onDelete, onUpdate }) => {
   const handleUpdateClick = () => {
@@ -11,8 +13,8 @@ const TaskItem = ({ task, onDelete, onUpdate }) => {
   return (
     <li>
       {task.task}
-      <button onClick={() => onDelete(task._id)}>Delete</button>
-      <button onClick={handleUpdateClick}>Update</button>
+      <button class="itemBtn" onClick={() => onDelete(task._id)}>Delete</button>
+      <button class="itemBtn" onClick={handleUpdateClick}>Update</button>
     </li>
   );
 };

@@ -50,7 +50,7 @@ const TaskPage = () => {
   };
 
   return (
-    <div>
+    <div id="main">
       <h1>Task Manager</h1>
       <TaskForm onSubmit={handleAddTask} />
       <TaskList tasks={tasks} onDelete={handleDeleteTask} onUpdate={handleUpdateTask} />
